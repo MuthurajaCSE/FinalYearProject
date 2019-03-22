@@ -142,7 +142,17 @@ axes(handles.axes2);
 imshow(img_new);
 handles.img_new = img_new;
 
-
+InputImage= handles.img_old;
+ReconstructedImage=img_new;
+n=size(InputImage);
+M=n(1);
+N=n(2);
+MSE = sum(sum((InputImage-ReconstructedImage).^2))/(M*N);
+PSNR = 10*log10(256*256/MSE);
+a1 = MSE(:,:,3);
+a2 = PSNR(:,:,2);
+set(handles.edit1,'string',a1);
+set(handles.edit2,'string',a2);
 
 
 % --- Executes on button press in Save.
